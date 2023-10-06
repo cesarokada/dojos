@@ -25,19 +25,19 @@ Uma compra é composta por:
 * Valor total da compra
 * Parcelas
 
-#### Regras de Negócio
+#### Validações Necessárias
 1. O valor total da compra deve ser maior que zero.
 2. A quantidade de parcelas deve ser maior que zero e no máximo em 12.
-3. Só é permitido valor parcelado para compras com valor maior ou igual a R$ 100,00.
+3. Só é permitido mais de uma parcela para compras com valor maior ou igual a R$ 100,00.
 
-### Parcelamento da Compra
+### Parcelas
 Uma parcela é composta de:
  * Número da parcela
  * Valor da parcela
  * Data de vencimento
 
-#### Condicoes para o parcelamento
-1. Pagamento em apenas uma parcela possui desconto de 5%, considerando o valor total do pedido. Neste caso, o arredondamento deve HALF UP, considerando duas casas de precisão.
+#### Regras
+* Pagamento em apenas uma parcela possui desconto de 5%, considerando o valor total do pedido. Neste caso, o arredondamento deve HALF UP, considerando duas casas de precisão.
 
 | Valor Bruto R$ | Valor Arredondado R$ |
 |----------------|----------------------|
@@ -46,9 +46,8 @@ Uma parcela é composta de:
 | 100.1595       | 100.02               |
 
 
-#### Regra de Vencimento das parcelas
-1. A data de vencimento da primeira parcela deve ser 3 dias após a data atual. Caso o dia seja não útil (sábado ou domingo), postergar para o próximo dia útil.
-2. As demais parcelas devem vencer no mesmo dia da primeira parcela, porém nos meses consecutivos. Caso o dia seja não útil (sábado ou domingo), postergar para o próximo dia útil.
+* A data de vencimento da primeira parcela deve ser 3 dias após a data atual. Caso o dia seja não útil (sábado ou domingo), postergar para o próximo dia útil.
+* As demais parcelas devem vencer no mesmo dia da primeira parcela, porém nos meses consecutivos. Caso o dia seja não útil (sábado ou domingo), postergar para o próximo dia útil.
 
 #### Arredondamento do Valor das Parcelas
 Por se tratar de valor monetário, devemos considerar no máximo duas casa decimais, por exemplo: R$ 50,27.
