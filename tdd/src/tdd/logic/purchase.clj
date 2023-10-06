@@ -1,7 +1,18 @@
 (ns tdd.logic.purchase)
 
-(defn- apply-discount [amount]
-  (* amount 0.95))
+(defn- discountable? [{:keys [installments]}]
+  (= installments 1))
+
+(defn round-half-up-2-decimal-places [x]
+  (let [x (* 100 x)
+        rounded (Math/round x)]
+    (/ rounded 100.0)))
+
+(defn- apply-discount [purchase-order]
+  (if (discountable? purchase-order)
+    (update purchase-order :amount #(round-half-up-2-decimal-places (* % 0.95)))
+    purchase-order))
+
 (defn- validate [{:keys [amount installments] :as purchase-order}]
   (cond
     (<= amount 0)
@@ -16,4 +27,5 @@
 
 (defn create [purchase-order]
   (-> purchase-order
-      validate))
+      validate
+      apply-discount))
