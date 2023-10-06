@@ -17,9 +17,9 @@
                           (logic.purchase/create {:amount 10 :installments 2})))))
 
 (deftest purchase-creating-success
-  (testing "should create a purchase with amount less than 100 and installment amount of 1"
-    (is (= {:amount 50.00 :installments 1}
-           (logic.purchase/create {:amount 50.00 :installments 1}))))
+  (testing "should create a purchase with amount less than 100 and installment amount of 1 and discount of 5%"
+    (is (= {:amount 35.63 :installments 1}
+           (logic.purchase/create {:amount 37.5 :installments 1}))))
   (testing "should create a purchase with amount greater than 100 and installment amount of 1"
     (is (= {:amount 100.00 :installments 12}
            (logic.purchase/create {:amount 100.00 :installments 12})))))
